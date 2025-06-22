@@ -1,4 +1,4 @@
-###**USING STRINGBUILDER**
+# **USING STRINGBUILDER**
 
 class Solution {
     public String toLowerCase(String s) {
