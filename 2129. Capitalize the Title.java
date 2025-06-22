@@ -23,6 +23,27 @@ class Solution {
     }
 }
 
+---------------------------------------------------------------------------------------------------------------------------
+🔄 Possible Refinement:
+You can slightly simplify the logic (same complexity) by reducing the substring() calls or avoiding length() repetition:
+
+for (int i = 0; i < str.length; i++) {
+    String word = str[i];
+    int len = word.length();
+
+    if (len <= 2) {
+        sb.append(word);
+    } else {
+        sb.append(Character.toUpperCase(word.charAt(0)))
+          .append(word.substring(1));
+    }
+
+    if (i != str.length - 1) {
+        sb.append(' ');
+    }
+}
+
+
 Time - O(n)
 Space - O(n)
 
