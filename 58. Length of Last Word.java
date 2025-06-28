@@ -15,7 +15,7 @@ Space: O(n) — array allocation
                   <----------NOTE---------->
 \\s+ => all whitespaces and non-visible characters
 st.replaceAll("\\s+","") removes all whitespaces and non-visible characters (e.g., tab, \n).
-
+The trim() method is a built-in function in Java that removes leading and trailing whitespace from a string. 
 ____________________________________________________________________________________________________________________
 🚶 2. Better (Trim + lastIndexOf)
 
