@@ -1,4 +1,4 @@
-🐢 1. Brute‑Force (Split)
+🐢 1. Brute‑Force (Split) 
   
 class Solution {
     public int lengthOfLastWord(String s) {
