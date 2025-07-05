@@ -2,6 +2,19 @@
 Description:
 Efficiently process all subarrays of a fixed size k by updating the sum as the window slides. The fixedWindowMaxSum method finds the maximum sum of any subarray of size k using the sliding window technique.
 
+public int fixedWindowMaxSum(int[] arr, int k) {
+    int n = arr.length, maxSum = 0, windowSum = 0;
+    for (int i = 0; i < k; i++) windowSum += arr[i];
+    maxSum = windowSum;
+    for (int i = k; i < n; i++) {
+        windowSum += arr[i] - arr[i - k];
+        maxSum = Math.max(maxSum, windowSum);
+    }
+    return maxSum;
+}
+
+
+  
 📌 Example:
 Let’s say:
 int[] arr = {2, 1, 5, 1, 3, 2};
