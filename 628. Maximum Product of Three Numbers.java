@@ -1,6 +1,6 @@
 The maximum product of three numbers will either be:
-Product of the three largest numbers (all positives), or
-Product of the two smallest (possibly negative) numbers and the largest number (e.g., -10 × -10 × 5)
+-> Product of the three largest numbers (all positives), or
+-> Product of the two smallest (possibly negative) numbers and the largest number (e.g., -10 × -10 × 5)
 
 public int maximumProduct(int[] nums) {
     Arrays.sort(nums);
