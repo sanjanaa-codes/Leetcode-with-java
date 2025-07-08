@@ -1,29 +1,35 @@
-✅ 1. Brute Force Approach
-🔹 Idea:
-Try all possible substrings.
-Check if each has all unique characters.
+1. Brute Force 
 
-public class Solution {
+✅ Code:
+
+class Solution {
     public int lengthOfLongestSubstring(String s) {
-        int maxLen = 0;
-
+        int maxLength = 0;
         for (int i = 0; i < s.length(); i++) {
-            Set<Character> set = new HashSet<>();
+            HashSet<Character> set = new HashSet<>();
             for (int j = i; j < s.length(); j++) {
-                if (set.contains(s.charAt(j))) {
+                if(set.contains(s.charAt(j))){
                     break;
                 }
                 set.add(s.charAt(j));
-                maxLen = Math.max(maxLen, j - i + 1);
+                maxLength = Math.max(maxLength, j - i + 1);
             }
         }
-
-        return maxLen;
+        return maxLength;
     }
 }
 
-⏱ Time Complexity: O(n²)
+🕒 Time Complexity: O(n²)
 📦 Space Complexity: O(n)
+
+🔁 Example Dry Run (s = "abcabcbb")
+
+| i | j | s\[j] | set       | maxLength |
+| - | - | ----- | --------- | --------- |
+| 0 | 0 | 'a'   | {a}       | 1         |
+| 0 | 1 | 'b'   | {a,b}     | 2         |
+| 0 | 2 | 'c'   | {a,b,c}   | 3         |
+| 0 | 3 | 'a'   | duplicate | break     |
 
 ______________________________________________________________________________________________________________________
   
