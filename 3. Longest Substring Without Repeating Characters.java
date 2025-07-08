@@ -1,6 +1,4 @@
-1. Brute Force 
-
-✅ Code:
+1. Brute Force ✅ 
 
 class Solution {
     public int lengthOfLongestSubstring(String s) {
@@ -33,46 +31,66 @@ class Solution {
 
 ______________________________________________________________________________________________________________________
   
-✅ 2. Better Approach – Sliding Window + HashSet
-🔹 Idea:
-Use a sliding window [left, right].
-Use HashSet to maintain unique characters.
-Slide window by removing from left when duplicate found.
+🔧 Optimized Sliding Window with HashSet
 
-public class Solution {
-    public int lengthOfLongestSubstring(String s) {
+class Solution {
+    public int lengthOfLongestSubstring(String str) {
+        if (str.length() == 0)
+            return 0;
+
+        int maxans = Integer.MIN_VALUE;
         Set<Character> set = new HashSet<>();
-        int left = 0, right = 0, maxLen = 0;
+        int l = 0;
 
-        while (right < s.length()) {
-            char ch = s.charAt(right);
-            if (!set.contains(ch)) {
-                set.add(ch);
-                maxLen = Math.max(maxLen, right - left + 1);
-                right++;
-            } else {
-                set.remove(s.charAt(left));
-                left++;
+        for (int r = 0; r < str.length(); r++) {
+            if (set.contains(str.charAt(r))) {
+                while (l < r && set.contains(str.charAt(r))) {
+                    set.remove(str.charAt(l));
+                    l++;
+                }
             }
+            set.add(str.charAt(r));
+            maxans = Math.max(maxans, r - l + 1);
         }
 
-        return maxLen;
+        return maxans;
     }
 }
 
-⏱ Time Complexity: O(2n) ≈ O(n)
-Each character is added and removed once.
+🧠 Concept Used:
+We maintain a sliding window from index l to r.
+The window contains unique characters only.
+If a duplicate is found at r, we shrink the window from the left (l) until the duplicate is removed.
+maxans = Math.max(maxans, r - l + 1) gives the maximum length of the window seen so far.
+
+🔢 Key Formula: Length of window = r - l + 1
+
+| Step | l | r | str\[r] | Action                     | Set       | maxans |
+| ---- | - | - | ------- | -------------------------- | --------- | ------ |
+| 1    | 0 | 0 | 'a'     | add                        | {a}       | 1      |
+| 2    | 0 | 1 | 'b'     | add                        | {a, b}    | 2      |
+| 3    | 0 | 2 | 'c'     | add                        | {a, b, c} | 3      |
+| 4    | 0 | 3 | 'a'     | duplicate → remove a (l=1) | {b, c, a} | 3      |
+| 5    | 1 | 4 | 'b'     | duplicate → remove b (l=2) | {c, a, b} | 3      |
+| 6    | 2 | 5 | 'c'     | duplicate → remove c (l=3) | {a, b, c} | 3      |
+| 7    | 3 | 6 | 'b'     | duplicate → remove b (l=5) | {c, b}    | 3      |
+| 8    | 5 | 7 | 'b'     | duplicate → remove b (l=6) | {b}       | 3      |
+
+⏱ Time Complexity: O(n)
+Each character is inserted and removed from the set at most once.
+
 📦 Space Complexity: O(n)
+Set stores up to n characters in worst case.
 
 ______________________________________________________________________________________________________________________
   
-✅ 3. Optimal Approach – Sliding Window + HashMap (Index Jump)
-  
 🔹 Idea:
-Store the last seen index of each character.
-If duplicate found, jump left to max(lastIndex + 1, left)
+Use a HashMap to store the last seen index of each character.
 
-public class Solution {
+When a duplicate is found, jump the left pointer to max(lastIndex + 1, left) to ensure all characters in the current window are unique.
+
+
+class Solution {
     public int lengthOfLongestSubstring(String s) {
         Map<Character, Integer> map = new HashMap<>();
         int left = 0, maxLen = 0;
@@ -81,7 +99,7 @@ public class Solution {
             char ch = s.charAt(right);
 
             if (map.containsKey(ch)) {
-                // Jump left pointer only forward
+                // Only move left forward
                 left = Math.max(left, map.get(ch) + 1);
             }
 
@@ -93,7 +111,8 @@ public class Solution {
     }
 }
 
-🧪 Dry Run Example: s = "abcabcbb"
+🧪 Dry Run Example:
+s = "abcabcbb"
 
 | Step | Left | Right | Char | Map             | MaxLen |
 | ---- | ---- | ----- | ---- | --------------- | ------ |
@@ -106,12 +125,12 @@ public class Solution {
 | 6    | 3→5  | 6     | b    | {a:3, b:6, c:5} | 3      |
 | 7    | 5→6  | 7     | b    | {a:3, b:7, c:5} | 3      |
 
-✅ Final Answer = 3 ("abc")
+✅ Final Answer = 3
+Substring = "abc" or "bca" or "cab" → all length 3
 
-📌 Summary Table
 
-| Approach    | Time  | Space | Notes                    |
-| ----------- | ----- | ----- | ------------------------ |
-| Brute Force | O(n²) | O(n)  | Try all substrings       |
-| Better      | O(n)  | O(n)  | Sliding window + HashSet |
-| **Optimal** | O(n)  | O(n)  | Sliding window + HashMap |
+| Approach         | Time  | Space | Notes                              |
+| ---------------- | ----- | ----- | ---------------------------------- |
+| Brute Force      | O(n²) | O(n)  | Try all substrings                 |
+| Better (HashSet) | O(n)  | O(n)  | Sliding window + HashSet           |
+| ✅ Optimal       | O(n)  | O(n)  | Sliding window + HashMap with jump |
