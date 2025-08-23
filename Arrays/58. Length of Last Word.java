@@ -8,6 +8,13 @@ class Solution {
     }
 }
 
+class Solution {
+    public int lengthOfLastWord(String s) {
+        String[] arr = s.split("\\s+");
+        return arr[arr.length -1].length();
+    }
+}
+
 Time: O(n) — trim + split 
 Space: O(n) — array allocation
 
@@ -47,6 +54,4 @@ class Solution {
 
 Time: O(n) — single linear pass 
 Space: O(1)
-
-
 ____________________________________________________________________________________________________________________
