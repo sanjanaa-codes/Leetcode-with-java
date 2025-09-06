@@ -59,4 +59,35 @@ Why This Works?
 -> By moving the pointers based on the comparison of height[left] and height[right], you ensure that you’re 
 -> always considering the lower of the two tallest bars (either left_max or right_max) to determine the water level.
 This approach avoids the need for additional arrays or data structures, making it space-efficient (O(1)).
+________________________________
 
+Trapping Rain Water — two-pointer walkthrough (step-by-step)
+
+Array (indices → heights):
+index: 0 1 2 3 4 5 6 7 8 9 10 11
+heights: 0 1 0 2 1 0 1 3 2 1 2 1
+
+Algorithm rule (two-pointer): keep l at left, r at right, maintain lmax and rmax.
+While l < r: compare heights[l] and heights[r].
+
+If heights[l] < heights[r] → process l: if heights[l] >= lmax set lmax = heights[l], else water += lmax - heights[l]; then l++.
+
+Else → process r: if heights[r] >= rmax set rmax = heights[r], else water += rmax - heights[r]; then r--.
+
+Below are the exact steps (showing l, r, values before calculation, action, water added, running total):
+
+________________________________
+
+| Step |  l |  r | h\[l] | h\[r] | lmax (before) | rmax (before) | Action (what we do)                          | Added | Total after |
+| ---: | -: | -: | ----: | ----: | ------------: | ------------: | -------------------------------------------- | ----: | ----------: |
+|    1 |  0 | 11 |     0 |     1 |             0 |             0 | `h[l]<h[r]`, `h[l]>=lmax` → set `lmax = 0`   |     0 |           0 |
+|    2 |  1 | 11 |     1 |     1 |             0 |             0 | `h[l]>=h[r]` → set `rmax = 1`                |     0 |           0 |
+|    3 |  1 | 10 |     1 |     2 |             0 |             1 | `h[l]<h[r]`, `h[l]>=lmax` → set `lmax = 1`   |     0 |           0 |
+|    4 |  2 | 10 |     0 |     2 |             1 |             1 | `h[l]<h[r]`, `h[l]<lmax` → add `1 - 0 = 1`   |     1 |           1 |
+|    5 |  3 | 10 |     2 |     2 |             1 |             1 | `h[l]>=h[r]` → set `rmax = 2`                |     0 |           1 |
+|    6 |  3 |  9 |     2 |     1 |             1 |             2 | `h[l]>=h[r]` → `h[r]<rmax` → add `2 - 1 = 1` |     1 |           2 |
+|    7 |  3 |  8 |     2 |     2 |             1 |             2 | `h[l]>=h[r]` → set `rmax = 2` (no change)    |     0 |           2 |
+|    8 |  3 |  7 |     2 |     3 |             1 |             2 | `h[l]<h[r]`, `h[l]>=lmax` → set `lmax = 2`   |     0 |           2 |
+|    9 |  4 |  7 |     1 |     3 |             2 |             2 | `h[l]<h[r]`, `h[l]<lmax` → add `2 - 1 = 1`   |     1 |           3 |
+|   10 |  5 |  7 |     0 |     3 |             2 |             2 | `h[l]<h[r]`, `h[l]<lmax` → add `2 - 0 = 2`   |     2 |           5 |
+|   11 |  6 |  7 |     1 |     3 |             2 |             2 | `h[l]<h[r]`, `h[l]<lmax` → add `2 - 1 = 1`   |     1 |           6 |
