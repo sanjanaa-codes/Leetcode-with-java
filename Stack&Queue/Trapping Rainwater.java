@@ -123,3 +123,9 @@ ________________________________
 |    9 |  4 |  7 |     1 |     3 |             2 |             2 | `h[l]<h[r]`, `h[l]<lmax` → add `2 - 1 = 1`   |     1 |           3 |
 |   10 |  5 |  7 |     0 |     3 |             2 |             2 | `h[l]<h[r]`, `h[l]<lmax` → add `2 - 0 = 2`   |     2 |           5 |
 |   11 |  6 |  7 |     1 |     3 |             2 |             2 | `h[l]<h[r]`, `h[l]<lmax` → add `2 - 1 = 1`   |     1 |           6 |
+
+https://takeuforward.org/data-structure/trapping-rainwater/
+https://leetcode.com/problems/trapping-rain-water/submissions/
+https://www.geeksforgeeks.org/dsa/trapping-rain-water/
+https://www.geeksforgeeks.org/problems/trapping-rain-water-1587115621/1
+https://www.naukri.com/code360/problems/trapping-rain-water_630519
