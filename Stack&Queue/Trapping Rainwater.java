@@ -28,7 +28,39 @@ class Solution {
 
 TC -> O(N)
 SC -> O(!)
+________________________________
 
+public class Solution {
+    public static long getTrappedWater(long []arr, int n) {
+        int l=0;
+        int r= n-1;
+        long lmax = 0;
+        long rmax = 0;
+        long total = 0;
+        while(l<r){
+            if(arr[l]<arr[r]){
+                if(arr[l]<lmax){
+                    total+=lmax - arr[l];
+                }  
+                else{
+                    lmax = arr[l];
+                } 
+                l=l+1;
+            }
+            else{
+                if(arr[r]<rmax){
+                    total+=rmax - arr[r];
+                }  
+                else{
+                    rmax = arr[r];
+                } 
+                r = r-1;
+            }   
+        }
+        return total;
+    }
+}
+________________________________
 
 For optimum approach
 ________________________________
