@@ -56,3 +56,40 @@ sb.append() is also O(1) amortized.
 You’re using StringBuilder as the stack.
 👉 So overall: O(1) extra (just the output storage)
 _______________________________________________________________________________________________
+class Solution {
+    public String removeDuplicates(String s) {
+        char[] arr = s.toCharArray();
+        int i = 0;
+        for (char ch : arr) {
+            if (i > 0 && arr[i - 1] == ch) {
+                i--;
+            } else {
+                arr[i++] = ch;
+            }
+        }
+        return new String(arr, 0, i);
+    }
+}
+    
+✅ Complexity
+
+Time Complexity: O(n)
+Space Complexity: O(1) (in-place)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
